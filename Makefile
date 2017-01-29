@@ -6,7 +6,7 @@ CFLAGS := -Wall -g -O0 -std=c99
 #for performance
 #CFLAGS := -Wall -g -O3 -std=c99
 
-INCLUDE := method.c
+INCLUDE := tools.c
 
 sudoku: main.c $(INCLUDE)
 	$(CC) -o $@ $(CFLAGS) $^

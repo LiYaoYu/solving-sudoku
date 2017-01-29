@@ -1,19 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "method.h"
+#include "tools.h"
 
-void get_data(char* file, int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+void fill_row(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
 {
-	FILE* fptr;
-	fptr = fopen(file, "r");
-
-	int i;
-	int j;
-	for (i = 0; i < 9; i++) {
-		for (j = 0; j < 9; j++) {
-			matrix[i][j] = fgetc(fptr) - '0';
-			valid[i][j] = matrix[i][j]? 1 : 0;
-		}
-	}
+	//TODO
+	//check if this row has number
+	//if yes, jump to next row
+	//if no, find where the number is
+	//if there is more than one place
+	//jump to next row
 }
+
+void fill_col(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+{
+	//TODO
+}
+
+void fill_blo(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+{
+	//TODO
+}
+
+void fill_obv(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+{
+	//TODO
+}
+
+
+

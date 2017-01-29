@@ -1,13 +1,14 @@
 #include <stdio.h>
 
+#include "tools.h"
 #include "method.h"
 
 #define MAXFILENAME 32
 
 int main()
 {
-	int matrix[9][9]; //sudoku matrix
-	int valid[9][9];  //check the correspond matrix if it is valid
+	int matrix[SUDOKUSIZE][SUDOKUSIZE]; //sudoku matrix
+	int valid[SUDOKUSIZE][SUDOKUSIZE];  //check the correspond matrix if it is valid
 	char file[MAXFILENAME];
 
 	puts("Please input the sudoku data file.");
@@ -15,6 +16,8 @@ int main()
 
 	get_data(file, matrix, valid);
 
-	//TODO
-	puts("after get data");
+	//TODO: algorithm
+	fill_obv(matrix, valid); //fill in the obvious field
+
+	output_matrix(matrix);
 }

@@ -3,20 +3,17 @@
 #include "tools.h"
 #include "method.h"
 
-#define MAXFILENAME 32
-
 int main()
 {
-	suref matrix[SUDOKUSIZE][SUDOKUSIZE]; //sudoku reference matrix
-	char file[MAXFILENAME];
+	get_data();
 
-	puts("Please input the sudoku data file.");
-	scanf("%s", file);
+	//print origin sudoku
+	output_matrix();
 
-	get_data(file, matrix);
+	//algorithm
+	fill_obv(); //fill in the obvious field
+	fill_remain(); //fill in the remain field
 
-	//TODO: algorithm
-	//fill_obv(matrix); //fill in the obvious field
-
-	output_matrix(matrix);
+	//print result sudoku
+	output_matrix();
 }

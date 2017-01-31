@@ -3,11 +3,13 @@
 
 #include "method.h"
 
-void init_suref(suref* element, char c);
+#define MAXFILENAME 32
 
-void get_data(char* file, suref matrix[][SUDOKUSIZE]);
+void init_surinfo(surinfo* element, char c);
 
-void print_line(suref line[]);
+void get_data();
 
-void output_matrix(suref matrix[][SUDOKUSIZE]);
+void print_line(surinfo line[]);
+
+void output_matrix();
 #endif

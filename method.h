@@ -5,15 +5,28 @@
 
 typedef struct {
 	int value;
-	int ref[10];
-}suref; //sudoku reference
+	int origin;
+	int ref[SUDOKUSIZE + 1];
+}surinfo; //sudoku reference
 
-void check_row(suref matrix[][SUDOKUSIZE]);
+int cnt_valid();
 
-void check_col(suref matrix[][SUDOKUSIZE]);
+void update_ref(int row, int col);
 
-void check_blo(suref matrix[][SUDOKUSIZE]);
+void check_ref(int row, int col);
 
-void fill_obv(suref matrix[][SUDOKUSIZE]);
+void handle_row(int row, void (*pfunc)(int, int));
+
+void handle_col(int col, void (*pfunc)(int, int));
+
+void handle_blo(int blo, void (*pfunc)(int, int));
+
+void handle_ref();
+
+void handle_value();
+
+void fill_obv();
+
+void fill_remain();
 
 #endif

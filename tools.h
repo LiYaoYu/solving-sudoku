@@ -1,11 +1,13 @@
 #ifndef _TOOLS_H
 #define _TOOLS_H
 
-#define SUDOKUSIZE 9
+#include "method.h"
 
-void get_data(char* file, int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE]);
+void init_suref(suref* element, char c);
 
-void print_line(int* line);
+void get_data(char* file, suref matrix[][SUDOKUSIZE]);
 
-void output_matrix(int matrix[][SUDOKUSIZE]);
+void print_line(suref line[]);
+
+void output_matrix(suref matrix[][SUDOKUSIZE]);
 #endif

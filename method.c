@@ -1,7 +1,6 @@
 #include "method.h"
-#include "tools.h"
 
-void fill_row(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+void check_row(suref matrix[][SUDOKUSIZE])
 {
 	//TODO
 	//check if this row has number
@@ -11,20 +10,17 @@ void fill_row(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
 	//jump to next row
 }
 
-void fill_col(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+void check_col(suref matrix[][SUDOKUSIZE])
 {
 	//TODO
 }
 
-void fill_blo(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+void check_blo(suref matrix[][SUDOKUSIZE])
 {
 	//TODO
 }
 
-void fill_obv(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE])
+void fill_obv(suref matrix[][SUDOKUSIZE])
 {
 	//TODO
 }
-
-
-

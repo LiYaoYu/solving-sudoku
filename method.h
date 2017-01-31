@@ -1,12 +1,19 @@
 #ifndef _METHOD_H
 #define _METHOD_H
 
-void fill_row(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE]);
+#define SUDOKUSIZE 9
 
-void fill_col(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE]);
+typedef struct {
+	int value;
+	int ref[10];
+}suref; //sudoku reference
 
-void fill_blo(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE]);
+void check_row(suref matrix[][SUDOKUSIZE]);
 
-void fill_obv(int matrix[][SUDOKUSIZE], int valid[][SUDOKUSIZE]);
+void check_col(suref matrix[][SUDOKUSIZE]);
+
+void check_blo(suref matrix[][SUDOKUSIZE]);
+
+void fill_obv(suref matrix[][SUDOKUSIZE]);
 
 #endif

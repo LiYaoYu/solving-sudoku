@@ -10,10 +10,11 @@ void init_surinfo(surinfo* element, char c)
 	(*element).value = c;
 	if (c == 0) {
 		(*element).origin = 0;
+		(*element).remain = 9;
 		memset((*element).ref, 1, sizeof((*element).ref));
 	} else {
 		(*element).origin = 1;
-		memset((*element).ref, 0, sizeof((*element).ref));
+		(*element).remain = 0;
 	}
 }
 

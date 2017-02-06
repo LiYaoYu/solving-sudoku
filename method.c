@@ -1,9 +1,11 @@
+#include <stdio.h>
 #include <strings.h>
 #include <math.h>
 
 #include "method.h"
 
 surinfo matrix[SUDOKUSIZE + 1][SUDOKUSIZE + 1]; //sudoku reference matrix
+int simple[2];
 int existed[SUDOKUSIZE + 1] = {0};
 
 int cnt_valid()
@@ -19,53 +21,94 @@ int cnt_valid()
 	return n;
 }
 
-void update_ref(int row, int col)
+int update_ref(int row, int col)
 {
 	int i;
 	for (i = 1; i < (SUDOKUSIZE + 1); i++) {
-		if (existed[i] && matrix[row][col].ref[i])
+		if (existed[i] && matrix[row][col].ref[i]) {
 			matrix[row][col].ref[i] = 0;
+			matrix[row][col].remain--;
+		}
 	}
+	return UNFINISHED;
 }
 
-void check_ref(int row, int col)
+int check_ref(int row, int col)
 {
 	//update ref
 	if (matrix[row][col].value != 0) {
 		existed[matrix[row][col].value] = 1;
 	}
+	return UNFINISHED;
 }
 
-void update_value(int row, int col)
+int update_value(int row, int col)
 {
+	surinfo element;
+	element = matrix[row][col];
+
+	if (element.value) {
+		bzero(element.ref, sizeof(element.ref));
+		matrix[row][col].remain = 0;
+			return UNFINISHED;
+	}
+
 	int i;
 	int r = 0; //record
 	for (i = 0; i < SUDOKUSIZE + 1; i++) {
-		if ((matrix[row][col].ref[i] && r) || matrix[row][col].value)
-			return;
+		if (matrix[row][col].ref[i] && r)
+			return UNFINISHED;
 		if (matrix[row][col].ref[i] && !r)
 			r = i;
 	}
 	matrix[row][col].value = r;
+	matrix[row][col].remain = 0;
+	return UNFINISHED;
 }
 
-void handle_row(int row, void (*pfunc)(int, int))
+int find_simple(int row, int col)
+{
+	static int min_remain;
+
+	if (matrix[row][col].remain == 0)
+		return UNFINISHED;
+
+	if (row == 1 && col == 1) {
+		min_remain = 9;
+	}
+
+	//get the smallest remain
+	if (matrix[row][col].remain < min_remain) {
+		min_remain = matrix[row][col].remain;
+		simple[0] = row;
+		simple[1] = col;
+	}
+
+	if (min_remain == 2)
+		return FINISHED;
+
+	return UNFINISHED;
+}
+
+void handle_row(int row, int (*pfunc)(int, int))
 {
 	int i;
 	for (i = 1; i < SUDOKUSIZE + 1; i++) {
-		(*pfunc)(row, i);
+		if (FINISHED == (*pfunc)(row, i))
+			break;
 	}
 }
 
-void handle_col(int col, void (*pfunc)(int, int))
+void handle_col(int col, int (*pfunc)(int, int))
 {
 	int i;
 	for (i = 1; i < SUDOKUSIZE + 1; i++) {
-		(*pfunc)(i, col);
+		if (FINISHED == (*pfunc)(i, col))
+			break;
 	}
 }
 
-void handle_blo(int blo, void (*pfunc)(int, int))
+void handle_blo(int blo, int (*pfunc)(int, int))
 {
 /*
  * block:
@@ -90,7 +133,8 @@ void handle_blo(int blo, void (*pfunc)(int, int))
 
 	for (i = row; i < row + 3; i++) {
 		for (j = col; j < col + 3; j++) {
-		(*pfunc)(i, j);
+			if (FINISHED == (*pfunc)(i, j))
+				break;
 		}
 	}
 }
@@ -122,6 +166,7 @@ void handle_value()
 	}
 }
 
+
 void fill_obv()
 {
 	int n_valid;
@@ -135,12 +180,21 @@ void fill_obv()
 
 	if (n_valid != cnt_valid())
 		fill_obv();
-	
-	return;
-
 }
 
 void fill_remain()
 {
+	if (cnt_valid() == (int)pow(SUDOKUSIZE, 2)) //finished sudoku
+		return;
+
+	fill_obv();
+
+	int i;
+	//find the element which value might be determined most easily
+	for (i = 1; i < SUDOKUSIZE + 1; i++) {
+		handle_row(i, &find_simple);
+	}
+
 	//TODO
+	//recursive to fill the remain elements with the position info
 }

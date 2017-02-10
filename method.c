@@ -5,9 +5,9 @@
 #include "method.h"
 
 surinfo matrix[SUDOKUSIZE + 1][SUDOKUSIZE + 1]; //sudoku reference matrix
-int simple[2];
-int existed[SUDOKUSIZE + 1] = {0};
-
+//int simple[2];
+//int existed[SUDOKUSIZE + 1] = {0};
+/*
 int cnt_valid()
 {
 	int i;
@@ -89,6 +89,7 @@ int find_simple(int row, int col)
 
 	return UNFINISHED;
 }
+*/
 
 void handle_row(int row, int (*pfunc)(int, int))
 {
@@ -139,6 +140,7 @@ void handle_blo(int blo, int (*pfunc)(int, int))
 	}
 }
 
+/*
 void handle_ref()
 {
 	int i;
@@ -198,3 +200,4 @@ void fill_remain()
 	//TODO
 	//recursive to fill the remain elements with the position info
 }
+*/

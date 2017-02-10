@@ -11,8 +11,8 @@ int main()
 	output_matrix();
 
 	//algorithm
-	fill_obv(); //fill in the obvious field
-	fill_remain(); //fill in the remain field
+	//TODO: check if there is a answer database
+	//TODO: find relative answers.
 
 	//print result sudoku
 	output_matrix();

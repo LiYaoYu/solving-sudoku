@@ -1,0 +1,4 @@
+1. In collection branch, first need to check if there is a database response to 
+the relative sudoku problem.
+2. If there is no database, create it. 
+3. Read the database and query it to find the answer.
